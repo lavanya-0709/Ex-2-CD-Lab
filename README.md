@@ -33,6 +33,8 @@
 
 # INPUT
 ```c
+Developed by:LAVANYA S
+Registration Number: 212223230112
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
