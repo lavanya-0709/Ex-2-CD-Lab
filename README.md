@@ -32,6 +32,52 @@
 7.	Compile that file with C compiler and verify the output.
 
 # INPUT
+```c
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int isKeyword(char buffer[]) {
+    char keywords[5][10] = {"if", "else", "while", "for", "int"};
+    for (int i = 0; i < 5; ++i) {
+        if (strcmp(buffer, keywords[i]) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int main() {
+    char ch, buffer[15];
+    char operators[] = "+-*/=";
+    int i = 0;
+
+    printf("Enter your input: ");
+    
+    while ((ch = getchar()) != EOF) {
+        if (strchr(operators, ch)) {
+            printf("Operator: %c\n", ch);
+        } else if (isalnum(ch)) {
+            buffer[i++] = ch;
+        } else if ((ch == ' ' || ch == '\n' || ch == '\t') && i != 0) {
+            buffer[i] = '\0';
+
+            if (isKeyword(buffer)) {
+                printf("Keyword: %s\n", buffer);
+            } else if (isdigit(buffer[0])) {
+                printf("Number: %s\n", buffer);
+            } else {
+                printf("Identifier: %s\n", buffer);
+            }
+            i = 0;
+        }
+    }
+
+    return 0;
+}
+```
 # OUTPUT
+![Screenshot 2024-10-09 112619](https://github.com/user-attachments/assets/b0cd9975-b644-497f-bbf6-a2dd0e31cec5)
+
 # RESULT
 ## The lexical analyzer is implemented using lex and the output is verified.
